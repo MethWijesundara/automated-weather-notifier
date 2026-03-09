@@ -20,6 +20,7 @@ def get_weather():
         if data["cod"] == 200:
             temp = data["main"]["temp"]
             desc = data["weather"][0]["description"]
+            official_city_name = data["name"]
 
             # ==== newly added section ====
             if "rain" in desc.lower():
@@ -32,11 +33,11 @@ def get_weather():
             # =============================
             
             # 2. Create the message
-            message = f"It's {temp}°C with {desc} in {CITY}.\n{advice}."
+            message = f"It's {temp}°C with {desc} in {official_city_name}.\n{advice}."
             
             # 3. Send Notification
             notification.notify(
-                title=f"Weather Update: {CITY}",
+                title=f"Weather Update: {official_city_name}",
                 message=message,
                 app_icon=None,  # You can add a .ico file path here
                 timeout=10      # Seconds the notification stays on screen
